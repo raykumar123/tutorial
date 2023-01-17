@@ -35,8 +35,11 @@
         event.preventDefault();
         const name=event.target.username.value;
         const email=event.target.emailId.value;
-        localStorage.setItem('name',name);
-        localStorage.setItem('email',email);
+        var myobj={
+          name,
+          email
+        }
+        localStorage.setItem('userDetails',JSON.stringify(myobj));
       }
     </script>
   </body>
