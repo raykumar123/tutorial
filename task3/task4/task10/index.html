@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     
-    <link rel="stylesheet" href="style.css">
+    
   </head>
   <body>
     <header>
       <h1>JS For Beginners</h1>
     </header>
 
-    <section class="container">
+   // <section class="container">
       <form onsubmit="saveToLocalStorage(event)">
         <h1>Add User</h1>
         <div class="msg"></div>
@@ -26,21 +26,27 @@
         </div>
         <input class="btn" type="submit" value="Submit">
       </form>
-    </section>
+   // </section>
     
+<ul id='listOfitems'></ul>
+    <script>
+      function saveToLocalStorage(event) {
+    event.preventDefault();
 
-    <script >
-      function saveToLocalStorage(event)
-      {
-        event.preventDefault();
-        const name=event.target.username.value;
-        const email=event.target.emailId.value;
-        var myobj={
-          name,
-          email
+        const name = event.target.username.value;
+        const email = event.target.emailId.value;
+        var obj = {
+            name,
+            email
         }
-        localStorage.setItem('userDetails',JSON.stringify(myobj));
-      }
+        localStorage.setItem('userDetails', JSON.stringify(obj));
+        showUserOnScreen(obj)
+    }
+function showUserOnScreen(obj){
+    const parentElem =document.getElementById('listOfitems')
+    const childElem =document.createElement('li')
+   parentElem.innerHTML=parentElem.innerHTML+ `<li>${obj.name} - ${obj.email}</li>`
+}
     </script>
   </body>
 </html>
