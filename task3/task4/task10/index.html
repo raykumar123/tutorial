@@ -12,7 +12,7 @@
       <h1>JS For Beginners</h1>
     </header>
 
-   // <section class="container">
+   <section class="container">
       <form onsubmit="saveToLocalStorage(event)">
         <h1>Add User</h1>
         <div class="msg"></div>
@@ -26,7 +26,7 @@
         </div>
         <input class="btn" type="submit" value="Submit">
       </form>
-   // </section>
+    </section>
     
 <ul id='listOfitems'></ul>
     <script>
@@ -45,7 +45,17 @@
 function showUserOnScreen(obj){
     const parentElem =document.getElementById('listOfitems')
     const childElem =document.createElement('li')
-   parentElem.innerHTML=parentElem.innerHTML+ `<li>${obj.name} - ${obj.email}</li>`
+   //parentElem.innerHTML=parentElem.innerHTML+ `<li>${obj.name} - ${obj.email}</li>`
+   childElem.textContent=obj.name + ' - ' + obj.email + ' -  '
+   const deleteButton =document.createElement('input')
+   deleteButton.type="button"
+   deleteButton.value='Delete'
+   deleteButton.onclick =() => {
+    localStorage.removeItem(obj)
+    parentElem.removeChild(childElem)
+   }
+   childElem.appendChild(deleteButton)
+   parentElem.appendChild(childElem)
 }
     </script>
   </body>
