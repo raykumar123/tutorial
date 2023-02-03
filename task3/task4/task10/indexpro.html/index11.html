@@ -1,4 +1,25 @@
-function saveToLocalStorage(event) {
+<html>
+<body>
+  <form onsubmit="saveToLocalStorage(event)">
+  <label> choose Expenseamount </label>
+  <select id="priceInputTag" name="expense">
+    <option value="price"> Price </option>
+    <option value="100"> 100</option>
+    <option value="200"> 200</option>
+  </select>
+  <label> choose Description</label>
+  <input type="text" name="emailId" id="emailInputTag"  >
+  <label>choose a category </label>
+  <select id="itemsInputTag" name="description">
+    <option value="items"> Select items</option>
+    <option value="movie"> Movie</option>
+    <option value="electricity"> Electricity</option>
+  </select>
+  <button> Add Expense </button>
+  </form>
+<ul id='listOfitems'></ul>
+    <script >
+        function saveToLocalStorage(event) {
     event.preventDefault();
 
        const  expense = event.target.expense.value;
@@ -42,3 +63,6 @@ function showUserOnScreen(obj){
    childElem.appendChild(editButton)
    parentElem.appendChild(childElem)
 }
+    </script>
+  </body>
+</html>

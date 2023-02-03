@@ -1,37 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    
-    
-  </head>
-  <body>
-    <header>
-      <h1>JS For Beginners</h1>
-    </header>
-
-   <section class="container">
-      <form onsubmit="saveToLocalStorage(event)">
-        <h1>Add User</h1>
-        <div class="msg"></div>
-        <div>
-          <label for="name">Name:</label>
-          <input type="text" name="username" required/>
-        </div>
-        <div>
-          <label for="email">EmailId:</label>
-          <input type="text" name="emailId">
-        </div>
-        <input class="btn" type="submit" value="Submit">
-      </form>
-    </section>
-    
+<html>
+<body>
+  <form onsubmit="saveToLocalStorage(event)">
+  <label> choose Expenseamount </label>
+  <select id="priceInputTag" name="expense">
+    <option value="price"> Price </option>
+    <option value="100"> 100</option>
+    <option value="200"> 200</option>
+  </select>
+  <label> choose Description</label>
+  <input type="email" name="emailId" id="emailInputTag"  required/>
+  <label>choose a category </label>
+  <select id="itemsInputTag" name="description">
+    <option value="items"> Select items</option>
+    <option value="movie"> Movie</option>
+    <option value="electricity"> Electricity</option>
+  </select>
+  <button> Add Expense </button>
+  </form>
 <ul id='listOfitems'></ul>
-    <script src="mainx.js">
-      
-
-    </script>
+    <script src="mainx.js"></script>
   </body>
 </html>
