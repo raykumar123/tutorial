@@ -1,12 +1,13 @@
+
+async function form(){
 const posts = [];
-function createPost() {
-    return new Promise( (resolve, reject) => {
+    const createPost = await new Promise( (resolve, reject) => {
         setTimeout( () => {
             posts.push({ title: 'Post One', body: 'This is post one', createdAt: new Date().getTime()});
             resolve(posts)
         }, 1000)
     }) 
-}
+
 function getPosts(){
     let output=''
     for(let i=0; i<posts.length; i++){
@@ -16,19 +17,18 @@ function getPosts(){
 
 }
 
- 
-function updatelastactivity() {
-    return new Promise( (resolve, reject) => {
+
+    const updatelastactivity = await new Promise( (resolve, reject) => {
         setTimeout( () => {
-            updatelastactivity = new Date().getTime();
+            var updatelastactivity = new Date().getTime();
             resolve(updatelastactivity);
         }, 1000)
     }) 
-}
 
 
-function deletePost(){
-    return new Promise((resolve, reject) => {
+
+
+    const deletePost = await new Promise((resolve, reject) => {
         setTimeout( () => {
             if(posts.length > 0){
                 const poppedElement  = posts.pop();
@@ -38,14 +38,32 @@ function deletePost(){
             }
         }, 1000)
     })
-}
 
 
-    Promise.all([createPost({title: 'Post two', body: 'This is post two', createdAt: new Date().getTime}),updatelastactivity()]).then(([createPostresolve , updatelastactivityresolve]) => {console.log(createPostresolve , updatelastactivityresolve)
-        getPosts()
-        deletePost().then(() =>{
-            getPosts();
-        })
+    //console.log(form);
+    // form();
+    // Promise.all([createPost({title: 'Post two', body: 'This is post two', createdAt: new Date().getTime}),updatelastactivity()]).then(([createPostresolve , updatelastactivityresolve]) => {console.log(createPostresolve , updatelastactivityresolve)
+    //     getPosts()
+    //     deletePost().then(() =>{
+    //         getPosts();
+    //     })
 
         
-        }).catch((err) => console.log(err))
+    //     }).catch((err) => console.log(err))
+    // let [cp, gp,dp,us] = await Promise.all([createPost({title: 'Post one', body: 'This is post one', createdAt: new Date().getTime}),updatelastactivity()]).then(([createPostresolve , updatelastactivityresolve]) => {console.log(createPostresolve , updatelastactivityresolve)
+    //          getPosts()
+    //          deletePost().then(() =>{
+    //              getPosts();
+    //          })
+    //         }).catch((err) => console.log(err))
+    
+    // }
+    let [cp, gp,dp,us] = await Promise.all([createPost ,updatelastactivity]).then(([createPostresolve , updatelastactivityresolve]) => {console.log(createPostresolve , updatelastactivityresolve)
+        getPosts()
+        deletePost =>{
+            getPosts();
+        }
+       }).catch((err) => console.log(err))
+
+}
+   form().then((m) => console.log(`m`));

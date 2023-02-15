@@ -1,45 +1,70 @@
-//console.log('ab')
-console.log('person1: shows ticket');
-console.log('person2: shows ticket');
-const preMovie = async () => {
-    const promisewifebringingTicks =new Promise((resolve, reject) =>{
-    setTimeout(() => resolve(`ticket`),3000);
-});  
 
-const getPopcorn =new Promise((resolve,reject) => resolve(`popcorn`));
+ async function formpost() {
 
-const addButter =new Promise((resolve,reject) => resolve(`butter`));
+const posts = [{title: 'POST1'},{title: 'POST2'}];
 
-const getColdDrinks  =new Promise((resolve,reject) => resolve(`colddrinks`));
+//Do not touch this function below
+const printPost = await new Promise((resolve,reject) => { posts.forEach((post) => {
+    console.log(post.title)
+    resolve()
+})
+})
+   
 
-
-
-
-let ticket =await promisewifebringingTicks;
- console.log('wife: i have the ticks');
- console.log('husband: we should go in');
- console.log('wife: no i am hungry');
-
-let popcorn = await getPopcorn;
- console.log('husband: i got some popcorn');
- console.log('husband: we should go in');
- console.log('wife: i need butter on my popcorn');
-
-let butter =await addButter;
-console.log(`husband: i got some ${butter} on popcorn`);
-console.log('husband: anything else darling?');
-console.log('wife: i need some colddrinks');
+//Do not touch this function below
+ 
+   const create3rdPost = await new Promise( (resolve, reject) => {
+        setTimeout( () => {
+            posts.push({title: 'POST3'});
+            resolve(create3rdPostresolve)
+        }, 3000)
+    }) 
 
 
-let colddrinks =await getColdDrinks;
-console.log('husband: okay i got some colddrinks');
-console.log('wife: lets go we are getting late');
-console.log('husband: thank you for the reminder *grins*');
+//Do not touch this function below
+ 
+    const create4thPost = await new Promise( (resolve, reject) => {
+        setTimeout( () => {
+            posts.push({title: 'POST4'});
+            resolve(create4thPostresolve);
+        }, 2000)
+    }) 
 
 
-return ticket;
+//Complete this function such that it returns a Promise
+//and removes the last element of the posts array with a 1 second delay(setTimeout)
+//to remove you can use array.pop method
+
+    //complete this function
+  const deletePost =await new Promise((resolve, reject) => {
+
+        setTimeout( () => {
+
+            posts.pop();
+
+            resolve(deletePost);
+
+        }, 1000)
+
+    })
+
+
+
+
+
+//make the following sequence work properly
+// create3rdPost().then(() => {
+//     deletePost().then(() =>{
+//     create4thPost().then(() =>{
+//     printPost() 
+    
+//     })    
+//     })
+    
+// })
+let[cr3,dp] = await Promise.all([create3rdPost , create4thPost]).then(([create3rdPost , create4thPost]) => {console.log(createPostresolve , updatelastactivityresolve)
+//console.log(formpost);
+ })
 }
-preMovie().then((m) => console.log(`person3: shows ${m}`));
 
-console.log('person4: shows ticket');
-console.log('person5: shows ticket');
+formpost().then((async) => console.log());
