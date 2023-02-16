@@ -2,35 +2,28 @@ function saveToLocalStorage(event) {
     event.preventDefault();
 
        const  expense = event.target.expense.value;
-        const emailId = event.target.emailId.value;
+        const email = event.target.emailId.value;
         const  description = event.target.description.value;
         var obj = {
             expense,
-            emailId,
+            email,
             description
         }
-        axios.post("https://crudcrud.com/api/4acc7b727dc944cb8f0d2b3a18a369ad/expensetracker",obj)
-        .then((respone) => {
-            showUserOnScreen(respone.data)
-            //console.log(Response)
-        }).catch((err) => {
-            console.log(err)
-        })
-        // localStorage.setItem(obj.expense, JSON.stringify(obj));
-        // localStorage.setItem(obj.email, JSON.stringify(obj));
-        // localStorage.setItem(obj.target, JSON.stringify(obj));
-        //showUserOnScreen(obj)
+        localStorage.setItem(obj.expense, JSON.stringify(obj));
+        localStorage.setItem(obj.email, JSON.stringify(obj));
+        localStorage.setItem(obj.target, JSON.stringify(obj));
+        showUserOnScreen(obj)
     }
 function showUserOnScreen(obj){
     const parentElem =document.getElementById('listOfitems')
     const childElem =document.createElement('li')
-   //parentElem.innerHTML=parentElem.innerHTML+ `<li>${obj.expense} - ${obj.email}</li>-${obj.description}`
-   childElem.textContent=obj.expense + ' - ' + obj.emailId + ' -  ' +obj.description + ' - '
+   //parentElem.innerHTML=parentElem.innerHTML+ `<li>${obj.name} - ${obj.email}</li>`
+   childElem.textContent=obj.expense + ' - ' + obj.email + ' -  ' +obj.description + ' - '
    const ExpDelButton =document.createElement('input')
    ExpDelButton.type="button"
    ExpDelButton.value='Delete Expense'
    ExpDelButton.onclick =() => {
-    localStorage.removeItem(obj.emailId)
+    localStorage.removeItem(obj.email)
     parentElem.removeChild(childElem)
    }
 
@@ -38,10 +31,10 @@ function showUserOnScreen(obj){
     editButton.type="button"
     editButton.value='Edit Expense'
    editButton.onclick =() => {
-     localStorage.removeItem(obj.emailId)
+     localStorage.removeItem(obj.email)
     parentElem.removeChild(childElem)
     document.getElementById('priceInputTag').value = obj.expense
-    document.getElementById('emailInputTag').value = obj.emailId
+    document.getElementById('emailInputTag').value = obj.email
     document.getElementById('itemsInputTag').value = obj.description
    }
    

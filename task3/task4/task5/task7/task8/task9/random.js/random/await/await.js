@@ -1,70 +1,56 @@
 
  async function formpost() {
-
+    //========== User's Code Starts Here ==========
 const posts = [{title: 'POST1'},{title: 'POST2'}];
 
 //Do not touch this function below
-const printPost = await new Promise((resolve,reject) => { posts.forEach((post) => {
-    console.log(post.title)
-    resolve()
-})
-})
-   
+function printPost() {
+    posts.forEach((post) => {
+        console.log(post.title)
+    })
+}
 
 //Do not touch this function below
- 
-   const create3rdPost = await new Promise( (resolve, reject) => {
+function create3rdPost() {
+    return new Promise( (resolve, reject) => {
         setTimeout( () => {
             posts.push({title: 'POST3'});
-            resolve(create3rdPostresolve)
+            resolve()
         }, 3000)
     }) 
-
-
+}
 //Do not touch this function below
- 
-    const create4thPost = await new Promise( (resolve, reject) => {
+function create4thPost() {
+    return new Promise( (resolve, reject) => {
         setTimeout( () => {
             posts.push({title: 'POST4'});
-            resolve(create4thPostresolve);
+            resolve();
         }, 2000)
     }) 
-
+}
 
 //Complete this function such that it returns a Promise
 //and removes the last element of the posts array with a 1 second delay(setTimeout)
 //to remove you can use array.pop method
-
+function deletePost(){
     //complete this function
-  const deletePost =await new Promise((resolve, reject) => {
+   return new Promise((resolve, reject) => {
 
         setTimeout( () => {
 
             posts.pop();
 
-            resolve(deletePost);
+            resolve();
 
         }, 1000)
 
     })
 
 
-
-
-
-//make the following sequence work properly
-// create3rdPost().then(() => {
-//     deletePost().then(() =>{
-//     create4thPost().then(() =>{
-//     printPost() 
-    
-//     })    
-//     })
-    
-// })
-let[cr3,dp] = await Promise.all([create3rdPost , create4thPost]).then(([create3rdPost , create4thPost]) => {console.log(createPostresolve , updatelastactivityresolve)
-//console.log(formpost);
- })
 }
 
-formpost().then((async) => console.log());
+//make the following sequence work properly
+let[cp3,cp4,dp,p,]= await Promise.all([create3rdPost,deletePost,create4thPost,printPost])
+ }
+
+formpost().then((m)=>console.log(m));
