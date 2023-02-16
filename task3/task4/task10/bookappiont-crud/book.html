@@ -1,0 +1,24 @@
+<html>
+<body>
+  <form onsubmit="saveToLocalStorage(event)">
+  <label> choose Expenseamount </label>
+  <select id="priceInputTag" name="expense">
+    <option value="price"> Price </option>
+    <option value="100"> 100</option>
+    <option value="200"> 200</option>
+  </select>
+  <label> choose Description</label>
+  <input type="email" name="emailId" id="emailInputTag" />
+  <label>choose a category </label>
+  <select id="itemsInputTag" name="description">
+    <option value="items"> Select items</option>
+    <option value="movie"> Movie</option>
+    <option value="electricity"> Electricity</option>
+  </select>
+  <button> Add Expense </button>
+  </form>
+<ul id='listOfitems'></ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.3/axios.min.js"></script>
+    <script src="book.js"></script>
+  </body>
+</html>

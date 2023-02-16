@@ -9,18 +9,25 @@ function saveToLocalStorage(event) {
             emailId,
             description
         }
-        axios.post("https://crudcrud.com/api/4acc7b727dc944cb8f0d2b3a18a369ad/expensetracker",obj)
-        .then((respone) => {
-            showUserOnScreen(respone.data)
-            //console.log(Response)
-        }).catch((err) => {
-            console.log(err)
-        })
-        // localStorage.setItem(obj.expense, JSON.stringify(obj));
-        // localStorage.setItem(obj.email, JSON.stringify(obj));
-        // localStorage.setItem(obj.target, JSON.stringify(obj));
-        //showUserOnScreen(obj)
-    }
+       
+    //     // localStorage.setItem(obj.expense, JSON.stringify(obj));
+    //     // localStorage.setItem(obj.email, JSON.stringify(obj));
+    //     // localStorage.setItem(obj.target, JSON.stringify(obj));
+    //     //showUserOnScreen(obj)
+    // }
+    
+
+    window.addEventListener("DOMContentLoaded",() =>{
+        const localStorageObj = localStorage;
+        const localStoragekeys = Object.keys(localStorageObj)
+
+        for(var i=0; i<localStoragekeys.length ;i++){
+            const key =localStoragekeys[i]
+            const userDetailsString = localStorageObj[key];
+            const userDetailsObj =JSON.parse(userDetailsString);
+            showUserOnScreen(userDetailsObj);
+        }
+    })
 function showUserOnScreen(obj){
     const parentElem =document.getElementById('listOfitems')
     const childElem =document.createElement('li')
