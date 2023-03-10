@@ -1,0 +1,105 @@
+<html>
+<body>
+  <form onsubmit="addNewExpense(event)">
+  <label for="expenseamount">Selling Price:</label> </label>
+  <input type="number" id="price" name="expenseamount" required ></input>
+  <label for="description">Product Name:</label> 
+  <input type="text" id="explain" name="description" id="emailInputTag" required></input>
+  <label for="category">Choose a Category:</label>
+  <select id="category" name="category">
+    <option value="Electronics">Electronics</option>
+    <option value="Food">Food</option>
+    <option value="Skincare">Skincare</option>
+  </select>
+  <button> Add Products</button>
+  </form>
+<div id='listOfitems'></div>
+<h1>Products</h1>
+<h1 id="p1">Electronics items</h1>
+<h1 id="p2">Food items</h1>
+<h1 id="p3">Skincare items</h1>
+<script>
+function saveToLocalStorage(event)
+{
+  event.preventDefault()
+    const expenseamount=event.target.expenseamount.value
+    const description=event.target.description.value
+    const category=event.target.category.value
+
+    var expense={
+        expenseamount,
+        description,
+        category
+    }
+
+    //adding to the local storage
+    localStorage.setItem(expense.expenseamount,JSON.stringify(expenseamount))
+    showNewExpenseOnScreen(expense)
+}
+window.addEventListener("DOMContentLoaded", () => {
+    const localStorageObj = localStorage;
+    const localstoragekeys  = Object.keys(localStorageObj)
+
+    for(var i =0; i< localstoragekeys.length; i++){
+        const key = localstoragekeys[i]
+        const expenseString = localStorageObj[key];
+        const expenseDetailsObj = JSON.parse(expenseString);
+        showNewExpenseOnScreen(expenseDetailsObj)
+    }
+})
+
+
+
+function showNewExpenseOnScreen(expense)
+{
+    //let parentNode=document.getElementById('listOfExpenses')
+    // let childHTML=`<li id=${expense.expenseAmount}> ${expense.expenseAmount}- ${expense.description}- ${expense.type}
+    //                     <button onclick=deleteExpense('${expense.expenseAmount}')> Delete Expense </button>
+    //                     <button onclick=editExpenseDetails('${expense.expenseAmount}','${expense.description}','${expense.type}')>Edit Expense </button>
+    //                 </li>`
+                    //console.log(childHTML)
+    
+                    if(expense.category==='Electronics')
+   {
+    p1.innerHTML=p1.innerHTML +`<li class="p1" id="${expense.Pname}">${expense.expenseamount}-${expense.description}-${expense.category}
+      <button class="btn1" onClick="deleteexpense('${expense.Pname}')">Delete</button></li>`
+   }
+   else if(expense.category==='Food')
+   {
+    p2.innerHTML=p1.innerHTML +`<li class="p2" id="${expense.Pname}">${expense.expenseamount}-${expense.description}-${expense.category}
+      <button class="btn1" onClick="deleteexpense('${expense.Pname}')">Delete</button></li>`
+    }
+    else(expense.category==='Skincare')
+   {
+    p3.innerHTML=p3.innerHTML +`<li class="p3" id="${expense.Pname}">${expense.expenseamount}-${expense.description}-${expense.category}
+      <button class="btn1" onClick="deleteexpense('${expense.Pname}')">Delete</button></li>`
+    }                
+  // parentNode.innerHTML=parentNode.innerHTML+childHTML
+}
+
+//edit
+function editExpenseDetails(expenseamount,description,category)
+{
+document.getElementById('price').value=expenseamount
+document.getElementById('explain').value=description
+document.getElementById('category').value=category
+
+deleteExpense(expenseamount)
+}
+
+//for deletion from localStorage
+function deleteExpense(expenseamount){
+    localStorage.removeItem(expenseamount);
+    removeExpenseFromScreen(expenseamount);
+}
+
+//for deletion from screen
+function removeExpenseFromScreen(expenseamount){
+    const parentNode = document.getElementById('listOfExpenses');
+    const childNodeToBeDeleted = document.getElementById(expenseamount);
+
+    parentNode.removeChild(childNodeToBeDeleted)
+}
+</script>
+</body>
+</html>
