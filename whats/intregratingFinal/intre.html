@@ -13,24 +13,29 @@
         <class class="form">
             <form id="expForm">
                 <div class="container-sm justify-content-center col-3">
-                    <label for="type" class="form-label">Type</label>
+                    <label for="type" class="form-label">Candy Type</label>
                     <select id="type" class="form-select">
                         <option value="ChooseOne">Choose One</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Shopping">Shopping</option>
-                        <option value="Health care">Health Care</option>
-                        <option value="Utility bills">Utility Bills</option>
+                        <option value="Entertainment">Dairymilk</option>
+                        <option value="Shopping">Munch</option>
+                        <option value="Health care">Park</option>
+                        <option value="Utility bills">5star</option>
                         <option value="Others">Others</option>
                     </select>
                 </div>
                 <div class="container-sm justify-content-center col-3">
-                    <label for="name" class="form-label">Purpose </label>
+                    <label for="name" class="form-label">Description </label>
                     <input type="text" id="name" class="form-control">
                 </div>
                 <div class="container-sm justify-content-center col-3">
-                    <label for="amount" class="form-label">Amount </label>
+                    <label for="amount" class="form-label">Price </label>
                     <input type="text" id="amount" class="form-control">
                 </div>
+                <div class="container-sm justify-content-center col-3">
+                    <label for="amount" class="form-label">Quantity</label>
+                    <input type="text" id="quant" class="form-control">
+                </div>
+
                 <br>
                 <div class="container justify-content-center col-1">
                 <button type="submit" class=" btn btn-primary buttonSave">Submit</button>
@@ -45,9 +50,9 @@
             <thead>
                 <tr>
                     <th>Type</th>
-                    <th>Purpose</th>
-                    <th>Amount</th>
-                    <th>Options</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
                 </tr>
             </thead>
             <tbody id="expenseTable"class="table-group-divider">
@@ -72,7 +77,7 @@ async function addProduct(e) {
     };
     await axios
       .post(
-        "https://crudcrud.com/api/5dfbf0b74fe34335855ea75c3d26d66c/productData",
+        "https://crudcrud.com/api/f64cd3fbb07a44e98250932d4e17d13a/productData",
         product
       )
       .then(() => {
@@ -98,7 +103,7 @@ async function showProducts() {
 
   await axios
     .get(
-      "https://crudcrud.com/api/5dfbf0b74fe34335855ea75c3d26d66c/productData"
+      "https://crudcrud.com/api/f64cd3fbb07a44e98250932d4e17d13a/productData"
     )
     .then((response) => {
       response.data.forEach((product) => {
@@ -134,7 +139,7 @@ async function showProducts() {
 async function deleteProduct(_id) {
   await axios
     .delete(
-      `https://crudcrud.com/api/5dfbf0b74fe34335855ea75c3d26d66c/productData/${_id}`
+      `https://crudcrud.com/api/f64cd3fbb07a44e98250932d4e17d13a/productData/${_id}`
     )
     .then(() => {
       count--;
