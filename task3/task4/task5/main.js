@@ -23,3 +23,57 @@ for(var i=0; i<odd.length; i++)
 }
 var secondItem=document.querySelector('li:nth-child(2)');
 secondItem.style.color='green'; 
+
+
+///
+//Convert the whole code into asyn wait function 
+
+const blogs =[];
+
+function create1stBlog() {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+blogs.push({title: 'BLOG1'});
+resolve();
+}, 3000);
+});
+}
+
+function create2ndBlog() {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+blogs.push({title: 'BLOG2'});
+resolve();
+}, 2000);
+});
+}
+
+function deleteBlog() {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+if(blogs.length > 0) {
+const poppedElement = blogs.pop();
+resolve(poppedElement);
+} else {
+reject("ERROR");
+}
+}, 1000);
+});
+}
+
+async function processBlogs() {
+try {
+await create1stBlog();
+await create2ndBlog();
+const deleteBlog1 = await deleteBlog();
+console.log(deleteBlog1.title);
+const deleteBlog2 = await deleteBlog();
+console.log(deleteBlog2.title);
+const deleteBlog3 = await deleteBlog();
+console.log(deleteBlog3.title);
+} catch (error) {
+console.log(error);
+}
+}
+
+processBlogs();

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+</head>
+
+<body>
+    <h1> Expense Tracker</h1>
+    <form onsubmit="saveToAxios(event)">
+
+        <label>Expense Price</label>
+        <input type="text" id="expense" name="amount">
+        <label>Expense Name</label>
+        <input type="text" id="description" name="description">
+
+        <button>Add Expense</button>
+    </form>
+    <h1>Products</h1><br>
+
+    <ul id="listOfExpenses"></ul>
+
+    <h2 id="total">Total price : 0 </h2> <br>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js"></script>
+    <script>
+        async function saveToAxios(event) {
+            event.preventDefault()
+            const expenseAmount = event.target.amount.value
+            const description = event.target.description.value
+            //const type=event.target.category.value
+
+            let expense = {
+                expenseAmount,
+                description,
+                // type
+            }
+
+            try {
+                const respone = await axios.post("https://crudcrud.com/api/7855beae29004649b20f20f6567b27eb/expenseData", expense)
+                showNewExpenseOnScreen(respone.data)
+            } catch (err) {
+                document.body.innerHTML = document.body.innerHTML + "<h2> Something went wrong </h2>"
+                console.log(err)
+            }
+
+
+        }
+
+        async function fetchExpenseData() {
+            try {
+                const response = await axios.get("https://crudcrud.com/api/7855beae29004649b20f20f6567b27eb/expenseData");
+                console.log(response);
+                for (let i = 0; i < response.data.length; i++) {
+                    showNewExpenseOnScreen(response.data[i]);
+                }
+            } catch (error) {
+                document.body.innerHTML += "<h2> Error Loading content .....</h2>";
+                console.log(error);
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", fetchExpenseData);
+
+        var totalPrice = 0;
+        var totalEl = document.getElementById('total');
+
+        function showNewExpenseOnScreen(expense) {
+            const parentNode = document.getElementById('listOfExpenses')
+            const childHTML = `<li id=${expense._id}> ${expense.expenseAmount}-${expense.description}
+                    <button onclick=deleteExpense('${expense._id}')>Delete</button>`;
+                    
+            parentNode.innerHTML = parentNode.innerHTML + childHTML
+            totalPrice += parseInt(expense.expenseAmount);
+            totalEl.textContent = `Total price: ${ totalPrice }`;
+
+        }
+        function deleteExpense(expenseId) {
+            console.log(`${ expenseId } will be deleted`);
+            axios.delete(`https://crudcrud.com/api/7855beae29004649b20f20f6567b27eb/expenseData/${expenseId}`)
+                .then(async (response) => {
+                await removeExpenseFromScreen(expenseId);
+                totalPrice -= parseInt(expense.expenseAmount);
+                totalEl.textContent = `Total price:${totalPrice}`;
+            })
+                .catch((err) => {
+                    console.log(err);
+                    document.body.innerHTML = document.body.innerHTML + "<h2>Error deleteing the expense <h2>";
+                });
+        }
+
+        async function removeExpenseFromScreen(expenseId) {
+            const parentNode = document.getElementById('listOfExpenses');
+            const childNodeToBeDeleted = document.getElementById(expenseId);
+
+            parentNode.removeChild(childNodeToBeDeleted);
+            console.log(`Node with id ${expenseId} is deleted successfully`);
+        }
+    </script>
+</body>
+
+</html>
